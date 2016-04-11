@@ -1,4 +1,4 @@
-def merge_sort(arr,stacks=0)
+def merge_sort(arr)
 	n = arr.count
 
 	return arr if n == 1
@@ -9,11 +9,12 @@ def merge_sort(arr,stacks=0)
 	left = merge_sort left
 	right = merge_sort right
 
-	p "Merging: #{left} and #{right}"
-	rez = merge(left,right)
-	p "Merge result: #{rez}"
-	puts ".............................."
-	return rez
+	# Uncomment to see merge info
+	# p "Merging: #{left} and #{right}"
+	merge(left,right)
+	# p "Merge result: #{rez}"
+	# puts ".............................."
+	# return rez
 end
 
 def merge(a,b)
@@ -39,6 +40,34 @@ def merge(a,b)
 	c
 end
 
-arr = [5,4,3,2,1,5,10,-2,42,2,12,45,312,34,51,-3,50]
-p "Array to be sorted: #{arr}"
-p merge_sort(arr)
+def buble_sort(arr) 
+	unordered = true
+	while unordered
+		unordered = false
+		for i in (1..arr.size-1)
+			if(arr[i-1] > arr[i])
+				arr[i-1], arr[i] = arr[i], arr[i-1] 
+				unordered = true;
+			end
+		end
+	end
+	arr
+end
+
+def time_block(&block)
+	start_time = Time.now
+	block.call
+	end_time = Time.now
+	puts "Time elapsed #{(end_time - start_time)}"
+end
+
+def get_random_array(n)
+	arr = []
+	n.times { arr << rand(100) }
+	arr
+end
+
+arr = [85,-4,1,2,55,23,0]
+p "#{arr} before sort"
+p buble_sort(arr) 
+p "#{arr} after sort"
