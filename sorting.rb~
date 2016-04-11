@@ -66,3 +66,8 @@ def get_random_array(n)
 	n.times { arr << rand(100) }
 	arr
 end
+
+arr = [85,-4,1,2,55,23,0]
+p "#{arr} before sort"
+p buble_sort(arr) 
+p "#{arr} after sort"
