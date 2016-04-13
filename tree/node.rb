@@ -15,9 +15,9 @@ module BinarySearchTree
 
 		def insert(v)
 			case v <=> value
-			when -1 then insert_left(v)
-			when 1 then insert_right(v)
-			when 0 then false
+				when -1 then insert_left(v)
+				when 1 then insert_right(v)
+				when 0 then false
 			end
 		end
 
@@ -39,11 +39,17 @@ module BinarySearchTree
 			end
 		end
 	end
+
+	def self.build_tree(array)
+		root = Node.new array[0]
+		array.each_with_index do |e,i|
+			next if i == 0
+			root.insert(e)
+		end
+		root
+	end
 end
 
 
-root = BinarySearchTree::Node.new(5)
-root.insert(3)
-root.insert(6)
-
+tree = BinarySearchTree::build_tree([8,9,1,0,13,-5])
 puts root.inspect
