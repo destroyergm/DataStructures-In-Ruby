@@ -29,7 +29,20 @@ module BinarySearchTree
 				queue.unshift node.right unless node.right.nil?
 				return node if value == node.value
 			end
-			return nil
+			nil
+		end
+
+		def depth_first_search(value)
+			#TODO IMPLEMENT
+		end
+
+		def dfs_rec(value, node)
+			if value == node.value
+				puts "Found node!"
+				return node
+			end
+			dfs_rec(value, node.left) if !node.left.nil?
+			dfs_rec(value, node.right) if !node.right.nil?
 		end
 
 		private
@@ -62,5 +75,4 @@ end
 
 
 tree = BinarySearchTree::build_tree([8,9,1,0,13,2])
-puts tree.breadth_first_search 13
-puts tree.inspect
+puts tree.dfs_rec(13,tree)
