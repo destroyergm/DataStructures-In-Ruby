@@ -1,5 +1,8 @@
 # Data structures by Stefan ( Destroyergm )
-Welcome to my project on ruby data structures. I'm doing this with The Odin project and the exersises from Computer Science section.
+Welcome to my project on ruby data structures. I'm doing this with The Odin project and the exersises from Computer Science section. You can take a look at that section here: [Odin Project - CS](http://www.theodinproject.com/ruby-programming/data-structures-and-algorithms)
+
+For convinience all 3 student projects from that page are collected in this repository.
+I've also added some of my own sorting alghotritams, that were not part of the exersise.
 
 # Recursion
 Recursion file contains a function to calculate the fib value of the given number.
