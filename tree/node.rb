@@ -33,7 +33,7 @@ module BinarySearchTree
 		end
 
 		def depth_first_search(value)
-			#TODO IMPLEMENT
+			#TODO IMPLEMENT ?
 		end
 
 		def dfs_rec(value, node)
