@@ -1,9 +1,8 @@
 module BinarySearchTree
 	class Node
-		attr_accessor :left, :right, :parent, :value
+		attr_accessor :left, :right, :value
 
 		def initialize(value)
-			@parent = nil
 			@left = nil
 			@right = nil
 			@value = value
@@ -21,6 +20,17 @@ module BinarySearchTree
 			end
 		end
 
+		def breadth_first_search(value)
+			queue = [] # Unshift to add to queue / pop to remove from queue
+			queue.unshift(self)
+			until queue.empty?
+				node = queue.pop
+				queue.unshift node.left unless node.left.nil?
+				queue.unshift node.right unless node.right.nil?
+				return node if value == node.value
+			end
+			return nil
+		end
 
 		private
 		def insert_left(value)
@@ -51,5 +61,6 @@ module BinarySearchTree
 end
 
 
-tree = BinarySearchTree::build_tree([8,9,1,0,13,-5])
-puts root.inspect
+tree = BinarySearchTree::build_tree([8,9,1,0,13,2])
+puts tree.breadth_first_search 13
+puts tree.inspect
