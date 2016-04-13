@@ -6,6 +6,10 @@ module KnightTour
 			@x = x
 			@y = y
 		end
+
+		def to_s
+			"Point: (#{x},#{y})"
+		end
 	end
 
 	class Board
@@ -25,8 +29,10 @@ module KnightTour
 		def to_s
 			out = ""
 			@grid.each do |row|
-				row.each do |e|
-					out += " #{e}"
+				out += "\t\t\t"
+				row.each_with_index do |e,i|
+					out += "#{e}"
+					out += "|" unless i == row.count - 1
 				end
 				out += "\n"
 			end
@@ -38,6 +44,29 @@ module KnightTour
 end
 
 
+def check_input(line)
+	unless line =~ /^\d,\d$/ 
+		puts "Wrong input."
+		exit
+	end
+end
+
 ### Program Entry point
+print "Enter knight position(format i,j): "
+line = gets.chomp
+check_input(line)
+numbers = line.split(',')
+p1 = KnightTour::Point.new numbers[0].to_i, numbers[1].to_i
+puts p1.inspect
+
+print "Enter goal position(format i,j): "
+line = gets.chomp
+check_input(line)
+numbers = line.split(',')
+p2 = KnightTour::Point.new numbers[0].to_i, numbers[1].to_i
+puts p2.inspect
+
+
 board = KnightTour::Board.new
-puts board
+
+
