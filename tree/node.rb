@@ -6,6 +6,8 @@ module BinarySearchTree
 			@left = nil
 			@right = nil
 			@value = value
+
+			@counter = 0
 		end
 
 		def to_s
@@ -13,6 +15,8 @@ module BinarySearchTree
 		end
 
 		def insert(v)
+			@counter = @counter + 1
+
 			case v <=> value
 				when -1 then insert_left(v)
 				when 1 then insert_right(v)
@@ -23,11 +27,17 @@ module BinarySearchTree
 		def breadth_first_search(value)
 			queue = [] # Unshift to add to queue / pop to remove from queue
 			queue.unshift(self)
+			iteration = 0
 			until queue.empty?
 				node = queue.pop
+				system 'clear'
+				puts iteration
+
 				queue.unshift node.left unless node.left.nil?
 				queue.unshift node.right unless node.right.nil?
 				return node if value == node.value
+				
+				iteration = iteration + 1
 			end
 			nil
 		end
@@ -43,6 +53,22 @@ module BinarySearchTree
 			end
 			dfs_rec(value, node.left) if !node.left.nil?
 			dfs_rec(value, node.right) if !node.right.nil?
+		end
+
+		def binary_search(value)
+			iteration = 0
+			root = self
+			while root
+				system "clear"
+				puts iteration
+				iteration += 1
+
+				case root.value <=> value
+				when 1 then root = root.left
+				when -1 then root = root.right
+				when 0 then return root
+				end
+			end
 		end
 
 		private
@@ -74,5 +100,7 @@ module BinarySearchTree
 end
 
 
-tree = BinarySearchTree::build_tree([8,9,1,0,13,2])
-puts tree.dfs_rec(13,tree)
+niz = []
+100000.times { |index| niz << index }
+tree = BinarySearchTree::build_tree(niz)
+puts tree.binary_search(88)

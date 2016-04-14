@@ -42,6 +42,7 @@ class Board
 
 			moves = posible_moves(node.position)
 
+			puts "Active node: #{node.position}"
 			moves.each do |move| 
 				node.add_edge Tile.new move,node
 			end
@@ -88,6 +89,6 @@ end
 
 board = Board.new 8,8
 puts "Path: "
-path = board.knights_tour([0,0],[5,5])
+path = board.knights_tour([0,0],[1,2])
 puts "It took #{path.count-1} moves to reach the destination."
 path.each { |node| puts "#{node.position} " }
