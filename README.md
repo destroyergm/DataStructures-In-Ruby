@@ -23,4 +23,5 @@ The folder knight contains all the code for the "Knight's tour" challange from t
 
 # About
 Thanks for viewing this repository. :)
+
 I've made all this thanks to the great material suplied by the odin project.
