@@ -86,11 +86,9 @@ class Board
 		# Generates a graph from the start position to the end position
 		graph = generate_graph
 		queue = Queue.new
-		
 		# Use BFS to find the shortest path
 		# Graph.find returns an index of the node, it will return nil if not found
 		start_node = graph[graph.find(start_pos)]
-		end_node = graph[graph.find(end_pos)]
 		# Info for calculating distance and predesesor
 		info = []
 		graph.each do |vertex| 
@@ -102,23 +100,32 @@ class Board
 
 		info[start_node.id][:distance] = 0
 
+		board[start_pos[0]][start_pos[1]] = 'S'
+		board[end_pos[0]][end_pos[1]] = 'E'
+
 		queue.enqueue(start_node)
 
 		goal = nil # goal variable
 		until queue.empty?
 			vertex = queue.dequeue
-			
+
 			vertex.edges.each do |edge_id|
 				next unless info[edge_id][:distance].nil?
 				info[edge_id][:distance] = info[vertex.id][:distance] + 1
 				info[edge_id][:predesesor] = vertex
+
 				# Found the node
-				if vertex == end_node
-					goal = vertex
+				if graph[edge_id].data == end_pos
+					goal = graph[edge_id]
 					break
 				end
 				queue.enqueue graph[edge_id]
 			end
+		end
+
+		if goal.nil?
+			p "I did not find any routes to goal"
+			exit
 		end
 
 		out = []
@@ -129,7 +136,7 @@ class Board
 			number_of_moves += 1
 		end
 
-		puts "Took you #{number_of_moves} moves from #{start_pos} to #{end_pos}"
+		puts "Took you #{number_of_moves-1} moves from #{start_pos} to #{end_pos}"
 		out.reverse.each do |row|
 			p row
 		end
@@ -183,4 +190,4 @@ class Board
 end
 
 b = Board.new 8
-b.knights_tour([0,0],[3,3])
+b.knights_tour([0,4],[6,5])
